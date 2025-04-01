@@ -654,7 +654,7 @@ class SUPIR_model_loader:
     @classmethod
     def INPUT_TYPES(s):
         return {"required": {
-            "supir_model": (folder_paths.get_filename_list("checkpoints"),),
+            "supir_model": (folder_paths.get_filename_list("supir_models"),),
             "sdxl_model": (folder_paths.get_filename_list("checkpoints"),),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
@@ -810,7 +810,7 @@ class SUPIR_model_loader_v2:
             "model" :("MODEL",),
             "clip": ("CLIP",),
             "vae": ("VAE",),
-            "supir_model": (folder_paths.get_filename_list("checkpoints"),),
+            "supir_model": (folder_paths.get_filename_list("supir_models"),),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
                     [
@@ -992,7 +992,7 @@ class SUPIR_model_loader_v2_clip:
             "clip_l": ("CLIP",),
             "clip_g": ("CLIP",),
             "vae": ("VAE",),
-            "supir_model": (folder_paths.get_filename_list("checkpoints"),),
+            "supir_model": (folder_paths.get_filename_list("supir_models"),),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
                     [
