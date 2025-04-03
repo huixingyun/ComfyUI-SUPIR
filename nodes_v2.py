@@ -653,8 +653,9 @@ If a list of captions is given and it matches the incoming image batch, each ima
 class SUPIR_model_loader:
     @classmethod
     def INPUT_TYPES(s):
+        supir_models = [m for m in folder_paths.get_filename_list("checkpoints") if m.startswith("SUPIR")]
         return {"required": {
-            "supir_model": (folder_paths.get_filename_list("supir_models"),),
+            "supir_model": (supir_models,),
             "sdxl_model": (folder_paths.get_filename_list("checkpoints"),),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
@@ -806,11 +807,12 @@ Loads the SUPIR model and the selected SDXL model and merges them.
 class SUPIR_model_loader_v2:
     @classmethod
     def INPUT_TYPES(s):
+        supir_models = [m for m in folder_paths.get_filename_list("checkpoints") if m.startswith("SUPIR")]
         return {"required": {
             "model" :("MODEL",),
             "clip": ("CLIP",),
             "vae": ("VAE",),
-            "supir_model": (folder_paths.get_filename_list("supir_models"),),
+            "supir_model": (supir_models,),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
                     [
@@ -987,12 +989,13 @@ high_vram: uses Accelerate to load weights to GPU, slightly faster model loading
 class SUPIR_model_loader_v2_clip:
     @classmethod
     def INPUT_TYPES(s):
+        supir_models = [m for m in folder_paths.get_filename_list("checkpoints") if m.startswith("SUPIR")]
         return {"required": {
             "model" :("MODEL",),
             "clip_l": ("CLIP",),
             "clip_g": ("CLIP",),
             "vae": ("VAE",),
-            "supir_model": (folder_paths.get_filename_list("supir_models"),),
+            "supir_model": (supir_models,),
             "fp8_unet": ("BOOLEAN", {"default": False}),
             "diffusion_dtype": (
                     [

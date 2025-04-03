@@ -21,9 +21,6 @@ from transformers import (
 )
 script_directory = os.path.dirname(os.path.abspath(__file__))
 
-if not "supir_models" in folder_paths.folder_names_and_paths:
-    folder_paths.add_model_folder_path("supir_models", os.path.join(folder_paths.models_dir, "checkpoints", "SUPIR"))
-
 def dummy_build_vision_tower(*args, **kwargs):
     # Monkey patch the CLIP class before you create an instance.
     return None
@@ -79,8 +76,9 @@ class SUPIR_Upscale:
 
     @classmethod
     def INPUT_TYPES(s):
+        supir_models = [m for m in folder_paths.get_filename_list("checkpoints") if m.startswith("SUPIR")]
         return {"required": {
-            "supir_model": (folder_paths.get_filename_list("supir_models"),),
+            "supir_model": (supir_models,),
             "sdxl_model": (folder_paths.get_filename_list("checkpoints"),),
             "image": ("IMAGE",),
             "seed": ("INT", {"default": 123, "min": 0, "max": 0xffffffffffffffff, "step": 1}),
